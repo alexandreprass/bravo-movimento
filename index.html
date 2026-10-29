@@ -57,6 +57,10 @@
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "33b11cd3-1f04-46f1-8714-53c7b37c42d5",
+        safari_web_id: "web.onesignal.auto.1592f4e8-7629-48b3-b916-fa35b5011e11",
+        notifyButton: {
+          enable: true,
+        },
         serviceWorkerParam: { scope: "/bravo-movimento/" },
         serviceWorkerPath: "bravo-movimento/OneSignalSDKWorker.js",
       });
