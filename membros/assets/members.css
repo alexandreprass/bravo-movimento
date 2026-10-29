@@ -499,3 +499,4 @@ body{font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
   .m-table td .badge,.m-table td .st-badge{white-space:nowrap}
   .m-table .row-actions{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:flex-end;min-width:240px;white-space:normal}
 }
+.container.auth-grid,.container.auth-single{width:min(1180px,100% - 2rem)}
