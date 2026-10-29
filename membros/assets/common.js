@@ -122,11 +122,18 @@
     const [p, qs] = String(path).split('?');
     const query = {}; new URLSearchParams(qs || '').forEach((v, k) => { query[k] = v; });
     let res, out;
-    try {
-      res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: 'Bearer ' + PUBLIC_JWT },
-        body: JSON.stringify({ p_token: getToken(), p_method: method, p_path: p, p_body: body && typeof body === 'object' ? body : {}, p_query: query }) });
-      out = await res.json();
-    } catch (_) { throw new ApiError('Não foi possível conectar ao servidor. Verifique sua internet e tente novamente.', 0, {}); }
+    const payload = JSON.stringify({ p_token: getToken(), p_method: method, p_path: p, p_body: body && typeof body === 'object' ? body : {}, p_query: query });
+    // A Data API às vezes recusa o token público antes de executar qualquer coisa ("jwk not found")
+    // ou devolve 5xx enquanto o banco acorda; nesses casos a requisição não rodou e é seguro repetir.
+    for (let tent = 0; tent < 6; tent++) {
+      try {
+        res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: 'Bearer ' + PUBLIC_JWT }, body: payload });
+        out = await res.json().catch(() => null);
+      } catch (_) { if (tent < 2) { await new Promise((r) => setTimeout(r, 600)); continue; } throw new ApiError('Não foi possível conectar ao servidor. Verifique sua internet e tente novamente.', 0, {}); }
+      const authGlitch = !res.ok && out && typeof out.message === 'string' && /jwk|jwt|jws/i.test(out.message);
+      if (!(authGlitch || res.status >= 500) || tent === 5) break;
+      await new Promise((r) => setTimeout(r, 250 + tent * 350));
+    }
     if (!res.ok || !out || typeof out.status !== 'number') throw new ApiError('Serviço indisponível no momento. Tente novamente em instantes.', res.status, {});
     const status = out.status, data = out.body || {};
     if (data.token) setToken(data.token);
