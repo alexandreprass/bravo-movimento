@@ -53,6 +53,9 @@
     t_audio: '<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
     t_archive: '<path d="M5 4h14v16H5z"/><path d="M12 4v3M12 9v2M12 13v2"/><rect x="10" y="15" width="4" height="3" rx=".8"/>',
     t_link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1"/>',
+    idcard: '<rect x="2.5" y="5" width="19" height="14" rx="3"/><circle cx="8.5" cy="11" r="2.2"/><path d="M5.5 16c.6-1.6 1.7-2.4 3-2.4s2.4.8 3 2.4M14 10h4.5M14 13h3"/>',
+    camera: '<path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/>',
+    download: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
     t_other: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>'
   };
   const icon = (name, cls) => svg(ICONS[name] || ICONS.t_other, cls);

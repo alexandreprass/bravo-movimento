@@ -9,7 +9,7 @@
   hydrate();
 
   /* ---------- Abas (acessível: setas, Home/End, hash) ---------- */
-  const TABS = ['mural', 'eventos', 'materiais', 'perfil'];
+  const TABS = ['mural', 'eventos', 'materiais', 'carteira', 'perfil'];
   function showTab(id, focus) {
     if (!TABS.includes(id)) id = 'mural';
     TABS.forEach((t) => {
@@ -276,7 +276,7 @@
     try {
       const me = await api('GET', '/api/me'); state.user = me.user;
       if (me.user.status !== 'verificado') { showPending(me.user.status === 'banido'); return; }
-      paintUser(); $('#dash-hero').hidden = false; $('#conteudo').hidden = false;
+      paintUser(); window.dispatchEvent(new CustomEvent('bravo:user', { detail: me.user })); $('#dash-hero').hidden = false; $('#conteudo').hidden = false;
       await Promise.all([paintGroup(), load()]);
       if (new URLSearchParams(location.search).get('bemvindo')) { toast('Cadastro concluído! Bem-vindo(a) ao BRAVO.'); history.replaceState(null, '', location.pathname + location.hash); }
     } catch (err) { if (err.code === 'nao_verificado') return showPending(false); if (err.status !== 401) $('#ann-list').replaceChildren(h('div', { class: 'empty', text: 'Não foi possível carregar os dados. Atualize a página.' })); }

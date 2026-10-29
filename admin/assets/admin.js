@@ -93,7 +93,7 @@
     const c = $('#count-pend'); c.textContent = items.length; c.hidden = !items.length;
     if (!items.length) return box.replaceChildren(h('div', { class: 'empty', text: 'Nenhum cadastro aguardando verificação.' }));
     box.replaceChildren(...items.map((u) => h('article', { class: 'pend' },
-      h('h3', {}, `${u.nome} ${u.sobrenome} `, stBadge(u.status)),
+      h('h3', {}, `${u.nome} ${u.sobrenome} `, stBadge(u.status), u.numero != null ? h('span', { class: 'badge', text: 'Nº ' + u.numero }) : null),
       h('dl', {}, h('dt', { text: 'E-mail' }), h('dd', { text: u.email }), h('dt', { text: 'Telefone' }), h('dd', { text: u.telefone }),
         h('dt', { text: 'CPF' }), h('dd', { class: 'mono', text: u.cpfMasked || 'Não informado' }),
         h('dt', { text: 'Local' }), h('dd', { text: `${u.cidade}/${u.estado} · ${u.pais}` }), h('dt', { text: 'Cadastro' }), h('dd', { text: fmtDateTime(u.criadoEm) })),
@@ -213,7 +213,7 @@
   async function loadMembers() {
     const f = filters(); const d = await api('GET', '/api/admin/members?' + qs({ ...f, page: S.memPage, size: S.memSize }));
     const body = $('#mem-body');
-    if (!d.items.length) body.replaceChildren(h('tr', {}, h('td', { colspan: 8, class: 'loading', text: 'Nenhum membro encontrado.' })));
+    if (!d.items.length) body.replaceChildren(h('tr', {}, h('td', { colspan: 9, class: 'loading', text: 'Nenhum membro encontrado.' })));
     else body.replaceChildren(...d.items.map(memberRow));
     const pages = Math.max(1, Math.ceil(d.total / d.size));
     $('#mem-info').textContent = `${d.total} membro(s) · página ${d.page} de ${pages}`;
@@ -223,6 +223,7 @@
     const self = S.me && u.id === S.me.id;
     const td = (label, ...kids) => h('td', { 'data-label': label }, ...kids);
     return h('tr', {},
+      td('Nº', h('span', { class: 'mono member-no', text: u.numero != null ? String(u.numero) : '—' })),
       td('Nome', h('strong', { text: `${u.nome} ${u.sobrenome}` })), td('E-mail', u.email), td('CPF', h('span', { class: 'mono', text: u.cpfMasked || '—' })),
       td('Local', `${u.cidade}/${u.estado}${u.pais !== 'Brasil' ? ' · ' + u.pais : ''}`),
       td('Papel', h('span', { class: 'badge' + (u.role === 'admin' ? ' admin' : ''), text: u.role === 'admin' ? 'Admin' : 'Membro' })),
