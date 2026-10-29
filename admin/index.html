@@ -16,6 +16,17 @@
   <script src="../assets/js-flag.js"></script>
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="../membros/assets/members.css">
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "33b11cd3-1f04-46f1-8714-53c7b37c42d5",
+        serviceWorkerParam: { scope: "/bravo-movimento/" },
+        serviceWorkerPath: "bravo-movimento/OneSignalSDKWorker.js",
+      });
+    });
+  </script>
 </head>
 <body class="m-body">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
