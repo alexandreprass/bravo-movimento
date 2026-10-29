@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Área de Membros | BRAVO – Movimento Conservador</title>
+  <meta name="description" content="Área de Membros do BRAVO – Movimento Conservador.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f3d27">
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+  <script src="../assets/js-flag.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="assets/members.css">
+</head>
+<body class="m-body">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header solid">
+    <div class="container nav-wrap">
+      <a href="../" class="brand" aria-label="BRAVO – Movimento Conservador, voltar ao site">
+        <img src="../assets/logo.jpg" alt="Logotipo BRAVO: leão dourado sobre fundo verde" width="48" height="48">
+        <span class="brand-text"><strong>BRAVO</strong><small>Movimento Conservador</small></span>
+      </a>
+      <div class="header-actions">
+        <a class="header-link hide-sm" href="../">Site</a>
+        <a class="btn btn-ghost btn-sm" id="admin-link" href="../admin/index.html" hidden>Admin<span class="hide-sm">istração</span></a>
+        <span class="user-chip" title="Sua conta"><span class="avatar" id="user-avatar" aria-hidden="true">B</span><span id="user-name">Membro</span></span>
+        <button type="button" class="btn btn-gold btn-sm" id="logout-btn">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="pending-wrap" id="pending-screen" hidden aria-live="polite">
+    <div class="pending-card" id="pending-card">
+      <div class="pending-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z"/><path d="M12 8v4l2.5 1.5"/></svg></div>
+      <h1 id="pending-title">AGUARDE A VERIFICAÇÃO DE SEGURANÇA</h1>
+      <p id="pending-text">Seu cadastro foi recebido e está em análise pela coordenação do BRAVO. Por segurança, conferimos os dados e as redes sociais informadas antes de liberar o acesso à Área de Membros.</p>
+      <p id="pending-text2">Assim que a verificação for concluída, basta entrar novamente para acessar anúncios, eventos, materiais e o grupo de verificados.</p>
+      <button type="button" class="btn btn-gold" id="pending-logout">Sair</button>
+    </div>
+  </section>
+
+  <section class="dash-hero" id="dash-hero" hidden aria-labelledby="welcome-title">
+    <div class="container">
+      <p class="eyebrow">Área de Membros</p>
+      <h1 id="welcome-title">Bem-vindo(a), <span class="gold-text" id="welcome-name">membro</span></h1>
+      <p class="sub">Acompanhe os comunicados, confirme presença nos eventos e acesse os materiais do movimento.</p>
+      <div class="stat-row" id="stats" aria-label="Resumo"></div>
+    </div>
+  </section>
+
+  <div class="container" id="wa-slot"></div>
+  <main id="conteudo" class="container dash-layout" hidden>
+    <div class="dash-nav" role="tablist" aria-label="Seções da Área de Membros" aria-orientation="vertical">
+        <button type="button" class="m-tab" role="tab" id="tab-mural" aria-controls="panel-mural" aria-selected="false" tabindex="-1" data-tab="mural"><span data-ico="megaphone"></span>Mural de anúncios<span class="count" id="count-mural" hidden></span></button>
+        <button type="button" class="m-tab" role="tab" id="tab-eventos" aria-controls="panel-eventos" aria-selected="false" tabindex="-1" data-tab="eventos"><span data-ico="calendar"></span>Eventos<span class="count" id="count-eventos" hidden></span></button>
+        <button type="button" class="m-tab" role="tab" id="tab-materiais" aria-controls="panel-materiais" aria-selected="false" tabindex="-1" data-tab="materiais"><span data-ico="folder"></span>Materiais</button>
+        <button type="button" class="m-tab" role="tab" id="tab-perfil" aria-controls="panel-perfil" aria-selected="false" tabindex="-1" data-tab="perfil"><span data-ico="user"></span>Meu perfil</button>
+    </div>
+
+    <div class="dash-panels">
+      <section class="dash-panel" role="tabpanel" id="panel-mural" aria-labelledby="tab-mural" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Mural de anúncios</h2><p>Comunicados oficiais da coordenação.</p></div></div>
+        <div class="stack" id="ann-list"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-eventos" aria-labelledby="tab-eventos" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Eventos</h2><p>Confirme sua presença. Você pode cancelar quando quiser.</p></div></div>
+        <div class="seg" role="group" aria-label="Filtrar eventos">
+          <button type="button" data-ev="next" aria-pressed="true">Próximos</button>
+          <button type="button" data-ev="past" aria-pressed="false">Realizados</button>
+        </div>
+        <div class="stack" id="ev-list"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-materiais" aria-labelledby="tab-materiais" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Materiais</h2><p>Documentos, vídeos, áudios, apresentações e links. Qualquer formato.</p></div></div>
+        <div class="mat-toolbar">
+          <div class="search-wrap"><span data-ico="search"></span><input type="search" id="mat-search" placeholder="Buscar por título, descrição ou arquivo…" aria-label="Buscar materiais" maxlength="80"></div>
+          <select class="m-select" id="mat-type" aria-label="Filtrar por tipo">
+            <option value="">Todos os tipos</option>
+            <option value="pdf">PDF</option><option value="doc">Documentos</option><option value="sheet">Planilhas</option><option value="slides">Apresentações</option><option value="image">Imagens</option><option value="video">Vídeos</option><option value="audio">Áudios</option><option value="archive">Compactados</option><option value="link">Links</option><option value="other">Outros</option>
+          </select>
+        </div>
+        <div class="cat-chips" id="mat-cats" role="group" aria-label="Filtrar por categoria"></div>
+        <div class="mat-grid" id="mat-list"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-perfil" aria-labelledby="tab-perfil" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Meu perfil</h2><p>Mantenha seus dados atualizados.</p></div></div>
+
+        <div class="card-flat">
+          <h3>Dados pessoais</h3>
+          <div id="profile-alert" class="alert" role="status" hidden></div>
+          <form id="profile-form" novalidate>
+            <div class="field-grid">
+              <div class="field"><label for="p-nome">Nome</label><input type="text" id="p-nome" name="nome" maxlength="60" required autocomplete="given-name"><span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="p-sobrenome">Sobrenome</label><input type="text" id="p-sobrenome" name="sobrenome" maxlength="80" required autocomplete="family-name"><span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="p-email">E-mail</label><input type="email" id="p-email" name="email" maxlength="254" readonly aria-describedby="p-email-help" autocomplete="email"><span class="help" id="p-email-help">Para alterar o e-mail, fale com a coordenação.</span><span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="p-telefone">Telefone / WhatsApp</label><input type="tel" id="p-telefone" name="telefone" maxlength="20" required autocomplete="tel"><span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="p-pais">País</label>
+                <select id="p-pais" name="pais" required>
+                  <option value="Brasil">Brasil</option>
+                  <option>Portugal</option>
+                  <option>Estados Unidos</option>
+                  <option>Argentina</option>
+                  <option>Paraguai</option>
+                  <option>Uruguai</option>
+                  <option>Chile</option>
+                  <option>Bolívia</option>
+                  <option>Colômbia</option>
+                  <option>Peru</option>
+                  <option>Venezuela</option>
+                  <option>Canadá</option>
+                  <option>México</option>
+                  <option>Reino Unido</option>
+                  <option>Irlanda</option>
+                  <option>Espanha</option>
+                  <option>Itália</option>
+                  <option>França</option>
+                  <option>Alemanha</option>
+                  <option>Suíça</option>
+                  <option>Países Baixos</option>
+                  <option>Bélgica</option>
+                  <option>Japão</option>
+                  <option>China</option>
+                  <option>Austrália</option>
+                  <option>Nova Zelândia</option>
+                  <option>Emirados Árabes Unidos</option>
+                  <option>Israel</option>
+                  <option>Angola</option>
+                  <option>Moçambique</option>
+                  <option>Cabo Verde</option>
+                  <option>África do Sul</option>
+                  <option value="__outro">Outro país (digitar)…</option>
+                </select>
+                <input type="text" id="p-paisOutro" name="paisOutro" maxlength="60" placeholder="Digite o país" aria-label="Nome do país" hidden>
+                <span class="error" aria-live="polite"></span></div>
+              <div class="field"><label>CPF</label><div><span class="cpf-badge" id="p-cpf">—</span></div><span class="help">O CPF não pode ser alterado pelo painel. Para corrigi-lo, fale com a coordenação.</span></div>
+              <div class="field"><label for="p-estado">Estado</label>
+                <select id="p-estado" name="estado"><option value="">Selecione…</option>
+                  <option value="AC">AC – Acre</option>
+                  <option value="AL">AL – Alagoas</option>
+                  <option value="AP">AP – Amapá</option>
+                  <option value="AM">AM – Amazonas</option>
+                  <option value="BA">BA – Bahia</option>
+                  <option value="CE">CE – Ceará</option>
+                  <option value="DF">DF – Distrito Federal</option>
+                  <option value="ES">ES – Espírito Santo</option>
+                  <option value="GO">GO – Goiás</option>
+                  <option value="MA">MA – Maranhão</option>
+                  <option value="MT">MT – Mato Grosso</option>
+                  <option value="MS">MS – Mato Grosso do Sul</option>
+                  <option value="MG">MG – Minas Gerais</option>
+                  <option value="PA">PA – Pará</option>
+                  <option value="PB">PB – Paraíba</option>
+                  <option value="PR">PR – Paraná</option>
+                  <option value="PE">PE – Pernambuco</option>
+                  <option value="PI">PI – Piauí</option>
+                  <option value="RJ">RJ – Rio de Janeiro</option>
+                  <option value="RN">RN – Rio Grande do Norte</option>
+                  <option value="RS">RS – Rio Grande do Sul</option>
+                  <option value="RO">RO – Rondônia</option>
+                  <option value="RR">RR – Roraima</option>
+                  <option value="SC">SC – Santa Catarina</option>
+                  <option value="SP">SP – São Paulo</option>
+                  <option value="SE">SE – Sergipe</option>
+                  <option value="TO">TO – Tocantins</option>
+                </select>
+                <input type="text" id="p-estadoTxt" name="estadoTxt" maxlength="60" placeholder="Estado / província / região" aria-label="Estado, província ou região" hidden>
+                <span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="p-cidade">Cidade</label><input type="text" id="p-cidade" name="cidade" maxlength="80" required autocomplete="address-level2"><span class="error" aria-live="polite"></span></div>
+              <div class="field full" id="p-senha-wrap" hidden><label for="p-senhaAtual">Senha atual <small>(necessária para alterar o e-mail)</small></label>
+                <div class="pw-wrap"><input type="password" id="p-senhaAtual" name="senhaAtual" autocomplete="current-password" maxlength="72"><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div><span class="error" aria-live="polite"></span></div>
+            </div>
+            <button type="submit" class="btn btn-gold" id="profile-save">Salvar alterações</button>
+          </form>
+        </div>
+
+        <div class="card-flat">
+          <h3>Alterar senha</h3>
+          <div id="pw-alert" class="alert" role="status" hidden></div>
+          <form id="pw-form" novalidate>
+            <div class="field-grid">
+              <div class="field full"><label for="pw-atual">Senha atual</label><div class="pw-wrap"><input type="password" id="pw-atual" name="senhaAtual" autocomplete="current-password" required maxlength="72"><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div><span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="pw-nova">Nova senha <small>(mín. 8)</small></label><div class="pw-wrap"><input type="password" id="pw-nova" name="novaSenha" autocomplete="new-password" required minlength="8" maxlength="72"><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div><span class="error" aria-live="polite"></span></div>
+              <div class="field"><label for="pw-conf">Confirmar nova senha</label><div class="pw-wrap"><input type="password" id="pw-conf" name="confirmarSenha" autocomplete="new-password" required minlength="8" maxlength="72"><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div><span class="error" aria-live="polite"></span></div>
+            </div>
+            <button type="submit" class="btn btn-gold" id="pw-save">Alterar senha</button>
+          </form>
+        </div>
+
+        <div class="card-flat">
+          <h3>Privacidade e dados (LGPD)</h3>
+          <p style="color:var(--muted);margin-bottom:1rem">Você pode baixar uma cópia dos seus dados ou excluir sua conta definitivamente. <a class="inline-link" href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.7rem">
+            <button type="button" class="btn btn-ghost-dark" id="export-btn">Baixar meus dados (JSON)</button>
+            <button type="button" class="btn btn-outline-danger" id="delete-btn">Excluir minha conta</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="m-dialog" id="preview-dlg" aria-labelledby="preview-title">
+    <div class="dlg-head"><h3 id="preview-title">Pré-visualização</h3><button type="button" class="dlg-close" id="preview-close" aria-label="Fechar">&times;</button></div>
+    <div class="dlg-body pad0"><div class="preview-stage" id="preview-stage"></div></div>
+    <div class="dlg-foot"><a class="btn btn-gold btn-sm" id="preview-dl" href="#">Baixar arquivo</a><button type="button" class="btn btn-ghost-dark btn-sm" id="preview-close2">Fechar</button></div>
+  </dialog>
+
+  <dialog class="m-dialog sm" id="delete-dlg" aria-labelledby="delete-title">
+    <form id="delete-form" method="dialog" novalidate>
+      <div class="dlg-head"><h3 id="delete-title">Excluir minha conta</h3><button type="button" class="dlg-close" data-close aria-label="Fechar">&times;</button></div>
+      <div class="dlg-body">
+        <div id="delete-alert" class="alert alert-error" role="alert" hidden></div>
+        <p style="margin-bottom:1rem">Esta ação é <strong>permanente</strong>: seus dados e confirmações de presença serão apagados. Digite sua senha para confirmar.</p>
+        <div class="field"><label for="del-senha">Senha</label><div class="pw-wrap"><input type="password" id="del-senha" name="senha" autocomplete="current-password" maxlength="72" required><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div><span class="error" aria-live="polite"></span></div>
+      </div>
+      <div class="dlg-foot"><button type="button" class="btn btn-ghost-dark btn-sm" data-close>Cancelar</button><button type="submit" class="btn btn-danger btn-sm" id="delete-confirm">Excluir definitivamente</button></div>
+    </form>
+  </dialog>
+  <footer class="m-footer">
+    <div class="container">© <span id="year">2026</span> BRAVO – Movimento Conservador · <a href="privacidade.html">Privacidade e LGPD</a> · <a href="../">Voltar ao site</a></div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/common.js"></script>
+  <script src="assets/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administração | BRAVO – Movimento Conservador</title>
+  <meta name="description" content="Área de Membros do BRAVO – Movimento Conservador.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f3d27">
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+  <script src="../assets/js-flag.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../membros/assets/members.css">
+</head>
+<body class="m-body">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header solid">
+    <div class="container nav-wrap">
+      <a href="../" class="brand" aria-label="BRAVO – Movimento Conservador, voltar ao site">
+        <img src="../assets/logo.jpg" alt="Logotipo BRAVO: leão dourado sobre fundo verde" width="48" height="48">
+        <span class="brand-text"><strong>BRAVO</strong><small>Administração</small></span>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-ghost btn-sm" href="../membros/index.html">Área<span class="hide-sm"> de Membros</span></a>
+        <span class="user-chip"><span class="avatar" id="user-avatar" aria-hidden="true">A</span><span id="user-name">Admin</span></span>
+        <button type="button" class="btn btn-gold btn-sm" id="logout-btn">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="dash-hero" aria-labelledby="admin-title">
+    <div class="container">
+      <p class="eyebrow">Painel administrativo</p>
+      <h1 id="admin-title">Administração <span class="gold-text">BRAVO</span></h1>
+      <p class="sub">Publique anúncios e eventos, envie materiais e gerencie os membros.</p>
+    </div>
+  </section>
+
+  <main id="conteudo" class="container dash-layout">
+    <div class="dash-nav" role="tablist" aria-label="Seções da administração" aria-orientation="vertical">
+        <button type="button" class="m-tab" role="tab" id="tab-visao" aria-controls="panel-visao" aria-selected="false" tabindex="-1" data-tab="visao"><span data-ico="chart"></span>Visão geral</button>
+        <button type="button" class="m-tab" role="tab" id="tab-pendentes" aria-controls="panel-pendentes" aria-selected="false" tabindex="-1" data-tab="pendentes"><span data-ico="shield"></span>Pendentes<span class="count" id="count-pend" hidden></span></button>
+        <button type="button" class="m-tab" role="tab" id="tab-anuncios" aria-controls="panel-anuncios" aria-selected="false" tabindex="-1" data-tab="anuncios"><span data-ico="megaphone"></span>Anúncios</button>
+        <button type="button" class="m-tab" role="tab" id="tab-eventos" aria-controls="panel-eventos" aria-selected="false" tabindex="-1" data-tab="eventos"><span data-ico="calendar"></span>Eventos</button>
+        <button type="button" class="m-tab" role="tab" id="tab-materiais" aria-controls="panel-materiais" aria-selected="false" tabindex="-1" data-tab="materiais"><span data-ico="folder"></span>Materiais</button>
+        <button type="button" class="m-tab" role="tab" id="tab-membros" aria-controls="panel-membros" aria-selected="false" tabindex="-1" data-tab="membros"><span data-ico="users"></span>Membros</button>
+    </div>
+    <div class="dash-panels">
+      <section class="dash-panel" role="tabpanel" id="panel-visao" aria-labelledby="tab-visao" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Visão geral</h2><p>Resumo da Área de Membros.</p></div></div>
+        <div class="kpis" id="kpis"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-pendentes" aria-labelledby="tab-pendentes" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Pendentes de verificação</h2><p>Confira os dados e as redes sociais antes de aprovar. Membros aprovados passam a ver todo o conteúdo e o grupo de verificados.</p></div></div>
+        <div class="pend-list" id="adm-pend"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-anuncios" aria-labelledby="tab-anuncios" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Anúncios</h2><p>Aparecem no mural dos membros. Fixados ficam no topo.</p></div><button type="button" class="btn btn-gold btn-sm" id="new-ann">+ Novo anúncio</button></div>
+        <div class="stack" id="adm-ann"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-eventos" aria-labelledby="tab-eventos" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Eventos</h2><p>Data e hora no horário de Brasília.</p></div><button type="button" class="btn btn-gold btn-sm" id="new-ev">+ Novo evento</button></div>
+        <div class="stack" id="adm-ev"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-materiais" aria-labelledby="tab-materiais" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Materiais</h2><p>Envie arquivos de qualquer formato (até <span id="max-mb">4</span> MB cada, 300 MB no total) ou cadastre links externos.</p></div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn btn-gold btn-sm" id="new-file">+ Enviar arquivo</button><button type="button" class="btn btn-ghost-dark btn-sm" id="new-link">+ Link externo</button></div></div>
+        <div class="stack" id="adm-mat"><div class="loading">Carregando…</div></div>
+      </section>
+
+      <section class="dash-panel" role="tabpanel" id="panel-membros" aria-labelledby="tab-membros" tabindex="0" hidden>
+        <div class="panel-head"><div><h2>Membros</h2><p>CPF sempre mascarado na tela.</p></div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn btn-ghost-dark btn-sm" id="csv-link">Exportar CSV (CPF mascarado)</button><button type="button" class="btn btn-outline-danger btn-sm" id="csv-full">CSV com CPF completo…</button></div></div>
+        <div class="filters">
+          <div class="search-wrap"><span data-ico="search"></span><input type="search" id="mem-q" placeholder="Buscar por nome, e-mail ou cidade…" aria-label="Buscar membros" maxlength="80"></div>
+          <select class="m-select" id="mem-role" aria-label="Filtrar por papel"><option value="">Todos os papéis</option><option value="member">Membros</option><option value="admin">Administradores</option></select>
+          <select class="m-select" id="mem-status" aria-label="Filtrar por situação"><option value="">Todas as situações</option><option value="nao_verificado">Não verificados</option><option value="verificado">Verificados</option><option value="banido">Recusados/banidos</option></select>
+        </div>
+        <div class="table-wrap"><table class="m-table"><caption class="sr-only">Lista de membros</caption>
+          <thead><tr><th scope="col">Nome</th><th scope="col">E-mail</th><th scope="col">CPF</th><th scope="col">Local</th><th scope="col">Papel</th><th scope="col">Situação</th><th scope="col">Cadastro</th><th scope="col">Ações</th></tr></thead>
+          <tbody id="mem-body"><tr><td colspan="8" class="loading">Carregando…</td></tr></tbody></table></div>
+        <div class="pager"><span id="mem-info"></span><div style="display:flex;gap:.5rem"><button type="button" class="btn btn-ghost-dark btn-xs" id="mem-prev">← Anterior</button><button type="button" class="btn btn-ghost-dark btn-xs" id="mem-next">Próxima →</button></div></div>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="m-dialog sm" id="form-dlg" aria-labelledby="form-dlg-title">
+    <form id="dlg-form" novalidate>
+      <div class="dlg-head"><h3 id="form-dlg-title">Formulário</h3><button type="button" class="dlg-close" data-close aria-label="Fechar">&times;</button></div>
+      <div class="dlg-body"><div id="dlg-alert" class="alert alert-error" role="alert" hidden></div><div id="dlg-fields"></div>
+        <div class="progress-bar" id="dlg-progress" hidden><i></i></div></div>
+      <div class="dlg-foot"><button type="button" class="btn btn-ghost-dark btn-sm" data-close>Cancelar</button><button type="submit" class="btn btn-gold btn-sm" id="dlg-submit">Salvar</button></div>
+    </form>
+  </dialog>
+  <dialog class="m-dialog sm" id="confirm-dlg" aria-labelledby="confirm-title">
+    <form id="confirm-form" novalidate>
+      <div class="dlg-head"><h3 id="confirm-title">Confirmar</h3><button type="button" class="dlg-close" data-close aria-label="Fechar">&times;</button></div>
+      <div class="dlg-body"><div id="confirm-alert" class="alert alert-error" role="alert" hidden></div><div id="confirm-body"></div></div>
+      <div class="dlg-foot"><button type="button" class="btn btn-ghost-dark btn-sm" data-close>Cancelar</button><button type="submit" class="btn btn-danger btn-sm" id="confirm-ok">Confirmar</button></div>
+    </form>
+  </dialog>
+  <dialog class="m-dialog sm" id="rsvp-dlg" aria-labelledby="rsvp-title">
+    <div class="dlg-head"><h3 id="rsvp-title">Confirmados</h3><button type="button" class="dlg-close" data-close aria-label="Fechar">&times;</button></div>
+    <div class="dlg-body" id="rsvp-body"></div>
+  </dialog>
+  <footer class="m-footer">
+    <div class="container">© <span id="year">2026</span> BRAVO – Movimento Conservador · <a href="../membros/privacidade.html">Privacidade e LGPD</a> · <a href="../">Voltar ao site</a></div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../membros/assets/common.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

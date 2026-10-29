@@ -431,3 +431,16 @@ h3{font-size:1.35rem;font-weight:700}
 
 /* contraste em seções escuras */
 .gallery h2 em,.counters h2 em,.final-cta h2 em{color:var(--gold-light)}
+
+/* ---------- Área de Membros: botões da navegação ---------- */
+.nav-members{display:flex;align-items:center;gap:.55rem}
+.nav-members .btn{white-space:nowrap}
+@media (max-width:1180px) and (min-width:981px){
+  .main-nav ul{gap:.8rem}.main-nav{gap:.8rem}
+  .main-nav a:not(.btn){font-size:.88rem}
+  .nav-members .btn{padding:.45rem .85rem;font-size:.85rem}
+}
+@media (max-width:980px){
+  .nav-members{flex-direction:column;align-items:stretch}
+  .nav-members .btn{width:100%;padding:.9rem;font-size:1rem}
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nova senha | BRAVO – Movimento Conservador</title>
+  <meta name="description" content="Área de Membros do BRAVO – Movimento Conservador.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f3d27">
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+  <script src="../assets/js-flag.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="assets/members.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header solid">
+    <div class="container nav-wrap">
+      <a href="../" class="brand" aria-label="BRAVO – Movimento Conservador, voltar ao site">
+        <img src="../assets/logo.jpg" alt="Logotipo BRAVO: leão dourado sobre fundo verde" width="48" height="48">
+        <span class="brand-text"><strong>BRAVO</strong><small>Movimento Conservador</small></span>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-ghost btn-sm" href="login.html">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="auth-main">
+    <div class="auth-bg" aria-hidden="true">
+      <div class="hero-glow glow-a"></div><div class="hero-glow glow-b"></div><div class="hero-pattern"></div>
+      <img class="hero-lion" src="../assets/lion.png" alt="" width="462" height="538">
+    </div>
+    <div class="container auth-grid narrow-card">
+      <div class="auth-intro">
+        <p class="kicker">Recuperação de acesso</p>
+        <h1>Crie uma <span class="gold-text">nova senha.</span></h1>
+      </div>
+      <div class="form-card auth-card sm">
+        <h2>Nova senha</h2>
+        <p class="sub">Escolha uma senha com no mínimo 8 caracteres.</p>
+        <div id="form-alert" class="alert" role="status" hidden></div>
+        <form id="reset-form" novalidate>
+          <div class="field">
+            <label for="senha">Nova senha</label>
+            <div class="pw-wrap"><input type="password" id="senha" name="senha" autocomplete="new-password" required minlength="8" maxlength="72"><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div>
+            <span class="error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="confirmarSenha">Confirmar nova senha</label>
+            <div class="pw-wrap"><input type="password" id="confirmarSenha" name="confirmarSenha" autocomplete="new-password" required minlength="8" maxlength="72"><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"></button></div>
+            <span class="error" aria-live="polite"></span>
+          </div>
+          <button type="submit" class="btn btn-gold btn-lg btn-block" id="submit-btn">Salvar nova senha</button>
+        </form>
+        <p class="auth-links"><a href="esqueci-senha.html">Solicitar novo link</a> · <a href="login.html">Login</a></p>
+      </div>
+    </div>
+  </main>
+  <footer class="m-footer">
+    <div class="container">© <span id="year">2026</span> BRAVO – Movimento Conservador · <a href="privacidade.html">Privacidade e LGPD</a> · <a href="../">Voltar ao site</a></div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/common.js"></script>
+  <script src="assets/forgot.js"></script>
+</body>
+</html>
